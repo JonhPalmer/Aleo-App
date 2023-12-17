@@ -34,15 +34,18 @@ program tictactoe.aleo {
     // - `b` : A tic tac toe board.
     // - `p` : A number corresponding to a player.
     function check_for_win(b: Board, p: u8) -> bool {
-        return
-            (b.r1.c1 == p && b.r1.c2 == p && b.r1.c3 == p) || // row 1
-            (b.r2.c1 == p && b.r2.c2 == p && b.r2.c3 == p) || // row 2
-            (b.r3.c1 == p && b.r3.c3 == p && b.r3.c3 == p) || // row 3
-            (b.r1.c1 == p && b.r2.c1 == p && b.r3.c1 == p) || // column 1
-            (b.r1.c2 == p && b.r2.c3 == p && b.r3.c2 == p) || // column 2
-            (b.r1.c3 == p && b.r2.c3 == p && b.r3.c3 == p) || // column 3
-            (b.r1.c1 == p && b.r2.c2 == p && b.r3.c3 == p) || // diagonal
-            (b.r1.c3 == p && b.r2.c2 == p && b.r3.c1 == p); // other diagonal
+        let isR1: bool = (b.r1.c1 == p && b.r1.c2 == p && b.r1.c3 == p);
+        let isR2: bool = (b.r2.c1 == p && b.r2.c2 == p && b.r2.c3 == p);
+        let isR3: bool = (b.r3.c1 == p && b.r3.c3 == p && b.r3.c3 == p);
+
+        let isC1: bool = (b.r1.c1 == p && b.r2.c1 == p && b.r3.c1 == p);
+        let isC2: bool = (b.r1.c2 == p && b.r2.c3 == p && b.r3.c2 == p);
+        let isC3: bool = (b.r1.c3 == p && b.r2.c3 == p && b.r3.c3 == p);
+
+        let isDiagonal: bool =  (b.r1.c1 == p && b.r2.c2 == p && b.r3.c3 == p);
+        let isOtherDiagonal: bool = (b.r1.c3 == p && b.r2.c2 == p && b.r3.c1 == p);
+
+        return isR1 || isR2 || isR3 || isC1 || isC2 || isC3 || isDiagonal || isOtherDiagonal;
     }
 
     // Returns an updated tic tac toe board with a move made by a player.
